@@ -28,15 +28,14 @@ public class GoogleOAuth: SignIn {
      */
     private init() {
         // Check if client ID exists in Info.plist
-        if let path = Bundle.main.path(forResource: "Info", ofType: "plist"),
-           let infoDict = NSDictionary(contentsOfFile: path),
-           let gidClientID = infoDict["GIDClientID"] as? String {
-            logger.info("Google client ID: \(gidClientID)")
-            self.clientID = gidClientID
-        } else {
+        guard let gidClientID = checkInfoPlist(key: "GIDClientID") else {
             logger.info("Google client ID does not exist")
             self.clientID = ""
+            return
         }
+        logger.info("Google client ID: \(gidClientID)")
+        self.clientID = gidClientID
+
         // Check URL deeplink setup (hidden in GoogleSignIn library)
     }
 
@@ -54,10 +53,7 @@ public class GoogleOAuth: SignIn {
             GIDSignIn.sharedInstance.restorePreviousSignIn(callback: callback)
             return
         }
-
-        // Get the window scene and root view controller
-        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-              let viewController = windowScene.windows.first?.rootViewController else { return }
+        guard let viewController = getRootViewController() else { return }
 
         // Configure GIDSignIn and initiate the sign-in process
         let configuration = GIDConfiguration(clientID: clientID)
