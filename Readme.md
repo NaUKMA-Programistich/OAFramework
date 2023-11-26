@@ -1,5 +1,12 @@
 # Single iOS Library for OAuth in popular social networks
 
+## Installation
+
+### Swift Package Manager
+
+* File > Swift Packages > Add Package Dependency
+* Add `https://github.com/NaUKMA-Programistich/OAuthSwift.git`
+
 ## Google
 
 ### Setup
@@ -58,3 +65,5 @@ struct OAuthExampleApp: App {
 * Call `GoogleOAuth.shared.handleLink(url: url)` in AppDelegate by method `application:openURL:options`
 * Call `GoogleOAuth.shared.startProcessSignIn` on action
 
+## Author
+Dzhos Oleksii me@programistich.com
