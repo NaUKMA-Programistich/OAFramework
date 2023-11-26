@@ -11,13 +11,14 @@ let package = Package(
     products: [
         .library(
             name: "OAFramework",
-            targets: ["OAFramework"]),
+            targets: ["OAFramework"])
     ],
     dependencies: [
         .package(url: "https://github.com/google/GoogleSignIn-iOS.git", from: "6.0.2"),
         .package(url: "https://github.com/facebook/facebook-ios-sdk.git", from: "16.2.1"),
         .package(url: "https://github.com/AzureAD/microsoft-authentication-library-for-objc.git", from: "1.2.18"),
         .package(url: "https://github.com/apple/swift-log.git", from: "1.0.0"),
+        .package(url: "https://github.com/realm/SwiftLint", branch: "main")
     ],
     targets: [
         .target(
@@ -25,7 +26,8 @@ let package = Package(
             dependencies: [
                 .product(name: "GoogleSignIn", package: "GoogleSignIn-iOS"),
                 .product(name: "Logging", package: "swift-log")
-            ]
-        ),
+            ],
+            plugins: [.plugin(name: "SwiftLintPlugin", package: "SwiftLint")]
+        )
     ]
 )

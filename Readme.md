@@ -5,7 +5,7 @@
 ### Swift Package Manager
 
 * File > Swift Packages > Add Package Dependency
-* Add `https://github.com/NaUKMA-Programistich/OAuthSwift.git`
+* Add `https://github.com/NaUKMA-Programistich/OAFramework.git`
 
 ## Google
 
