@@ -1,6 +1,9 @@
 import Foundation
 import UIKit
 
+/**
+ - Parameter key: Key in Info.plist
+ */
 func checkInfoPlist(key: String) -> String? {
     if let path = Bundle.main.path(forResource: "Info", ofType: "plist"),
        let infoDict = NSDictionary(contentsOfFile: path),
@@ -12,7 +15,7 @@ func checkInfoPlist(key: String) -> String? {
 }
 
 /**
- // Get root view controller
+ Get root view controller
  */
 func getRootViewController() -> UIViewController? {
     guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,

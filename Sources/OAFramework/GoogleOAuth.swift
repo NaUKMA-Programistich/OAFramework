@@ -3,6 +3,14 @@ import GoogleSignIn
 import Logging
 
 /**
+ Typealias represent data for Google OAuth in callback
+ - Parameters:
+    - user: Google user object if the authentication is successful, otherwise `nil`.
+    - error: An `Error` object if there is an error during the authentication process, otherwise `nil`.
+ */
+public typealias GoogleOAuthInformation = (user: GIDGoogleUser?, error: Error?)
+
+/**
  Typealias represent callback for Google OAuth
  - Parameters:
     - user: Google user object if the authentication is successful, otherwise `nil`.
@@ -76,6 +84,24 @@ public class GoogleOAuth: SignIn {
     public func signOut() {
         logger.info("#signOut")
         GIDSignIn.sharedInstance.signOut()
+    }
+}
+
+public extension GoogleOAuth {
+    /**
+     - Parameter data: Google OAuth data
+     */
+    static func displayInformationBy(data: GoogleOAuthInformation) {
+        if let error = data.error {
+            print("GoogleOAuth Error: \(error)")
+            return
+        }
+
+        if let user = data.user {
+            print("GoogleOAuth User Token: \(user.authentication.accessToken)")
+            return
+        }
+        print("GoogleOAuth Not Support Error")
     }
 }
 
