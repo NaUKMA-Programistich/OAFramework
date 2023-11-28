@@ -21,7 +21,10 @@ public typealias GithubOAuthCallback = (String?, Error?) -> Void
 /**
  Base class for Github OAuth
  */
-public class GithubOAuth: NSObject, ASWebAuthenticationPresentationContextProviding, SignIn {
+public class GithubOAuth: NSObject, ASWebAuthenticationPresentationContextProviding, OAuth {
+    typealias CallBack = GithubOAuthCallback
+    typealias Information = GithubOAuthInformation
+
     private let logger = Logger(label: "GithubOAuth")
 
     /// Shared instance of GithubOAuth https://github.com/settings/developers#oauth-apps
@@ -72,18 +75,22 @@ public class GithubOAuth: NSObject, ASWebAuthenticationPresentationContextProvid
 
         let authURL = URL(string: authURLString)!
 
-        let authSession = ASWebAuthenticationSession(url: authURL, callbackURLScheme: self.callbackUrl) { callbackURL, error in
+        let authSession = ASWebAuthenticationSession(
+            url: authURL,
+            callbackURLScheme: self.callbackUrl
+        ) { callbackURL, error in
             if let callbackURL = callbackURL {
-                let code = URLComponents(string: callbackURL.absoluteString)?.queryItems?.first(where: { $0.name == "code" })?.value
+                let code = URLComponents(string: callbackURL.absoluteString)?
+                    .queryItems?
+                    .first(where: { $0.name == "code" })?
+                    .value
                 if let code = code {
                     self.logger.info("code \(code)")
                     self.processGetAccessToken(code: code, callback: callback)
-                }
-                else {
+                } else {
                     callback(nil, nil)
                 }
-            }
-            else {
+            } else {
                 callback(nil, error)
             }
         }
@@ -112,7 +119,6 @@ public class GithubOAuth: NSObject, ASWebAuthenticationPresentationContextProvid
         var request = URLRequest(url: tokenEndpointURL)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
         do {
             request.httpBody = try JSONSerialization.data(withJSONObject: requestBody)
         } catch {
@@ -125,11 +131,9 @@ public class GithubOAuth: NSObject, ASWebAuthenticationPresentationContextProvid
                 callback(nil, error)
                 return
             }
-
-            guard 
-                let httpResponse = response as? HTTPURLResponse,
-                (200..<300).contains(httpResponse.statusCode),
-                let data = data
+            guard let httpResponse = response as? HTTPURLResponse,
+                    (200..<300).contains(httpResponse.statusCode),
+                  let data = data
             else {
                 callback(nil, (NSError(domain: "Invalid response", code: 0, userInfo: nil)))
                 return
@@ -168,7 +172,15 @@ public class GithubOAuth: NSObject, ASWebAuthenticationPresentationContextProvid
      Create ASPresentationAnchor for set presentationContextProvider
      */
     public func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
-        return ASPresentationAnchor()
+        var presentationAnchor: ASPresentationAnchor!
+        if Thread.isMainThread {
+            presentationAnchor = ASPresentationAnchor()
+        } else {
+            DispatchQueue.main.sync {
+                presentationAnchor = ASPresentationAnchor()
+            }
+        }
+        return presentationAnchor
     }
 }
 

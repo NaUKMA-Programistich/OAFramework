@@ -22,7 +22,9 @@ public typealias FacebookOAuthCallback = (FBSDKLoginKit.LoginManagerLoginResult?
 /**
  Base class for Facebook OAuth.
  */
-public class FacebookOAuth: SignIn {
+public class FacebookOAuth: OAuth {
+    typealias CallBack = FacebookOAuthCallback
+    typealias Information = FacebookOAuthInformation
 
     private let loginManager = LoginManager()
 

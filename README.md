@@ -14,11 +14,6 @@
 * Get OAuth Client ID and URL https://console.cloud.google.com/
 
 Example:
-
-CLIENT_ID: **1234567890-abcdefghijklmnopqrstuvwxyz.apps.googleusercontent.com**
-
-URL: **com.googleusercontent.apps.1234567890-abcdefghijklmnopqrstuvwxyz**
-
 * Add Google Client ID to Info.plist
 ```xml
     <key>GIDClientID</key>
@@ -79,15 +74,6 @@ struct OAuthExampleApp: App {
 * Add Client ID to Info.plist (APP-ID - our app id, APP-NAME - text in login CLIENT-TOKEN - )
 
 Example:
-
-CLIENT-TOKEN: **342747sgfghs342daqd**
-
-APP-ID: **1052601802859530**
-
-fbAPP-ID: **fb1052601802859530**
-
-APP-NAME: **OAuthExample**
-
 ```xml
 <key>CFBundleURLTypes</key>
 <array>
@@ -148,13 +134,6 @@ struct OAuthExampleApp: App {
 * Add client id, secret token, callback url to Info.Plist
 
 Example:
-
-CLIENT-ID: **342747sgfghs342daqd**
-
-SECRET-TOKEN: **ad8w48248dadf8a89**
-
-CALLBACK: example
-
 ```xml
 <key>CFBundleURLTypes</key>
 <array>
@@ -202,6 +181,57 @@ struct OAuthExampleApp: App {
 
 * Call `GithubOAuth.shared.startProcessSignIn` on action
 
+
+## Twitter
+
+### Setup
+* Register app in https://developer.twitter.com/en/portal/projects-and-apps
+* Add api key, api key secret, client id, secret token, callback url to Info.Plist
+
+```xml
+<key>CFBundleURLTypes</key>
+<array>
+  <dict>
+  <key>CFBundleURLSchemes</key>
+  <array>
+    <string>CALLBACK</string>
+  </array>
+  </dict>
+</array>
+
+<key>TwitterApiKey</key>
+<string>API-KEY</string>
+<key>TwitterApiKeySecret</key>
+<string>API-KEY-SECRET</string>
+<key>TwitterCallback</key>
+<string>CALLBACK</string>
+```
+
+## SwiftUI
+
+
+```swift
+import SwiftUI
+import OAFramework
+
+@main
+struct OAuthExampleApp: App {
+    var body: some Scene {
+        WindowGroup {
+            Button("Twitter Login") {
+                TwitterOAuth.shared.startProcessSignIn { token, error in
+                    TwitterOAuth.displayInformationBy(data: (token, error))
+                }
+            }
+            .padding()
+        }
+    }
+}
+```
+
+### UIKIT
+
+* Call `TwitterOAuth.shared.startProcessSignIn` on action
 
 ## Author
 Dzhos Oleksii me@programistich.com

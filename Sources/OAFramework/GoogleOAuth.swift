@@ -21,8 +21,11 @@ public typealias GoogleOAuthCallback = (GIDGoogleUser?, Error?) -> Void
 /**
  Base class for Google OAuth
  */
-public class GoogleOAuth: SignIn {
+public class GoogleOAuth: OAuth {
+    typealias CallBack = GoogleOAuthCallback
+    typealias Information = GoogleOAuthInformation
 
+    /// Logger
     private let logger = Logger(label: "GoogleOAuth")
 
     /// Shared instance of GoogleOAuth
@@ -103,9 +106,4 @@ public extension GoogleOAuth {
         }
         print("GoogleOAuth Not Support Error")
     }
-}
-
-/// Protocol indicating conformance to sign-in functionality.
-protocol SignIn {
-
 }
