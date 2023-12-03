@@ -153,12 +153,11 @@ extension TwitterOAuth {
 extension TwitterOAuth {
 
     /**
-     Exchanges a temporary OAuth token and verifier for the final OAuth access token required for authenticating Twitter API requests.
-
+     Temporary OAuth token and verifier for the final OAuth token required for authenticating Twitter API requests.
      - Parameters:
-        - temporaryCredentials: The temporary OAuth token and token secret obtained during the initial authentication process.
+        - temporaryCredentials: The temporary OAuth token and token secret.
         - verifier: The OAuth verifier obtained during the user authorization step.
-        - callback: A closure to be executed upon successful retrieval of the OAuth access token. The closure should take a `String` parameter representing the access token.
+        - callback: A closure to be executed upon successful retrieval of the OAuth access token.
     */
     private func getAccessToken(
         temporaryCredentials: TemporaryCredentials,
@@ -224,7 +223,7 @@ extension TwitterOAuth {
      Requests a temporary OAuth token for initiating the Twitter authentication process.
 
      - Parameters:
-        - callback: A closure to be executed upon successful retrieval of the temporary OAuth token. The closure should take a `TemporaryCredentials` object as its parameter.
+        - callback: A closure to be executed upon successful retrieval of the temporary OAuth token.
     */
     private func getRequestToken(callback: @escaping (TemporaryCredentials) -> Void) {
         self.logger.info("#getRequestToken")
@@ -338,7 +337,6 @@ extension TwitterOAuth {
             baseURLString.oAuthURLEncodedString + "&" +
             parameterString.oAuthURLEncodedString
     }
-
 
     /**
      Private function to generate the OAuth signing key used for OAuth 1.0a authentication.
