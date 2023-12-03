@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = "OAuthFramework"
-  spec.version      = "0.2.2"
+  spec.version      = "0.2.3"
   spec.summary      = "iOS Framework with popular social"
   spec.description  = "Single iOS Library for OAuth in popular social networks"
   spec.homepage     = "https://github.com/NaUKMA-Programistich/OAuthFramework"
