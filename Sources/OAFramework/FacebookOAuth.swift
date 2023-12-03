@@ -1,6 +1,6 @@
 import Foundation
-import FacebookCore
-import FacebookLogin
+import FBSDKCoreKit
+import FBSDKLoginKit
 import Logging
 
 /**
