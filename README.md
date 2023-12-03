@@ -1,11 +1,17 @@
-# Single iOS Library for OAuth in popular social networks - OAuthFramework
+# iOS Library for OAuth in popular social networks - OAuthFramework
+
+Supported Google, Facebook, Github, Twitter
 
 ## Installation
 
 ### Swift Package Manager
 
 * File > Swift Packages > Add Package Dependency
-* Add `https://github.com/NaUKMA-Programistich/OAFramework.git`
+* Add `https://github.com/NaUKMA-Programistich/OAuthFramework.git`
+
+### CocoaPods
+
+* Add pod OAuthFramework https://cocoapods.org/pods/OAuthFramework
 
 ## Google
 
@@ -186,7 +192,7 @@ struct OAuthExampleApp: App {
 
 ### Setup
 * Register app in https://developer.twitter.com/en/portal/projects-and-apps
-* Add api key, api key secret, client id, secret token, callback url to Info.Plist
+* Add api key, api key secret, callback url to Info.Plist
 
 ```xml
 <key>CFBundleURLTypes</key>
