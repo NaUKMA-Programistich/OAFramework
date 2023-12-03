@@ -1,4 +1,4 @@
-# Single iOS Library for OAuth in popular social networks
+# Single iOS Library for OAuth in popular social networks - OAuthFramework
 
 ## Installation
 

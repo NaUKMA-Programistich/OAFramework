@@ -4,14 +4,14 @@
 import PackageDescription
 
 let package = Package(
-    name: "OAFramework",
+    name: "OAuthFramework",
     platforms: [
         .iOS(.v13)
     ],
     products: [
         .library(
-            name: "OAFramework",
-            targets: ["OAFramework"])
+            name: "OAuthFramework",
+            targets: ["OAuthFramework"])
     ],
     dependencies: [
         .package(url: "https://github.com/google/GoogleSignIn-iOS.git", from: "6.0.2"),
@@ -22,7 +22,7 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "OAFramework",
+            name: "OAuthFramework",
             dependencies: [
                 .product(name: "GoogleSignIn", package: "GoogleSignIn-iOS"),
                 .product(name: "Logging", package: "swift-log"),

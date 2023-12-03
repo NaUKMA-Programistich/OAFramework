@@ -1,7 +1,7 @@
 import Foundation
+import Logging
 import FBSDKCoreKit
 import FBSDKLoginKit
-import Logging
 
 /**
  Typealias representing the data in callback for Facebook OAuth.
