@@ -28,8 +28,7 @@ let package = Package(
                 .product(name: "Logging", package: "swift-log"),
                 .product(name: "FacebookCore", package: "facebook-ios-sdk"),
                 .product(name: "FacebookLogin", package: "facebook-ios-sdk")
-            ],
-            plugins: [.plugin(name: "SwiftLintPlugin", package: "SwiftLint")]
+            ]
         )
     ]
 )
